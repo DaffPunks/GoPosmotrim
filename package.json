@@ -1,0 +1,36 @@
+{
+  "name": "go-posmotrim",
+  "description": "Let's watch it together",
+  "author": "Alex Daff & Klim Baklusha",
+  "version": "0.2.0",
+  "scripts": {
+    "start:prod": "node index.js",
+    "start:dev": "set DEBUG=config,sockets & node index.js",
+    "start": "npm run start:dev"
+  },
+  "dependencies": {
+    "debug": "^4.0.1",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
+    "pg": "^7.4.3",
+    "redom": "^3.13.1",
+    "socket.io": "^2.1.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^6.0.0",
+    "gulp-babel": "^8.0.0",
+    "gulp-clean-css": "^3.10.0",
+    "gulp-imagemin": "^4.1.0",
+    "gulp-minify": "^3.1.0",
+    "gulp-plumber": "^1.2.0",
+    "gulp-sass": "^4.0.1"
+  },
+  "engines": {
+    "node": ">= 0.8.0",
+    "npm": ">= 1.0"
+  },
+  "license": "MIT"
+}

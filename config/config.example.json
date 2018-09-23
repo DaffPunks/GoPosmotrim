@@ -1,0 +1,12 @@
+{
+  "postgresql": {
+    "host": "your-host",
+    "database": "your-database-name",
+    "user": "your-user-name",
+    "password": "your-password",
+    "port": "5432"
+  },
+  "app": {
+    "port": 8080
+  }
+}
