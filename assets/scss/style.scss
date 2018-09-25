@@ -1,0 +1,85 @@
+body
+{
+  background-color: #141E39;
+}
+/* GoPosmotrim */
+.sidebar
+{
+  background-color: #0D1932;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.25);
+  height: 100vh;
+
+}
+.sidebar div span
+{
+  color: green;
+}
+
+.sidebar div
+{
+  position: relative;
+  height: 70px;
+  left: 0px;
+  top: 0px;
+  font-family: Source Sans Pro;
+  font-style: normal;
+  font-weight: normal;
+  line-height: normal;
+  font-size: 34px;
+  color: white;
+  padding-top: 15px;
+  text-align: center;
+}
+/* Поиск */
+.header
+{
+  height: 70px;
+  border-bottom: 3px solid #0D1932;
+  margin: 0px -15px;
+}
+.header input
+{
+  position: absolute;
+  width: 1000px;
+  height: 50px;
+  top: 7.5px;
+  left: 35px;
+  font-family: Source Sans Pro;
+  font-style: normal;
+  font-weight: normal;
+  line-height: normal;
+  font-size: 18px;
+  color: white;
+  outline: none;
+  background-color: transparent;
+  border: none;
+  &::placeholder {
+    color: rgba(255, 255, 255, .5);}
+}
+
+.history
+{
+  text-align: center;
+  height: calc(100vh - 70px - 20px - 20px);
+  background-color: #0E1427;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  border-radius: 3px;
+  font-family: Source Sans Pro;
+  font-style: normal;
+  font-weight: normal;
+  line-height: normal;
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 20px;
+}
+
+/*Кто в онлайне*/
+.users
+{
+  text-align: center;
+  list-style-type: none;
+  width: 100%;
+  color:white;
+  border-bottom: 3px solid #0D1932;
+  font-size: 20px;
+}
