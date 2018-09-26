@@ -9,6 +9,7 @@ const autoprefixer  = require('gulp-autoprefixer');
 const babel         = require('gulp-babel');
 const minify        = require('gulp-minify');
 const imagemin      = require('gulp-imagemin');
+const webpack       = require('webpack-stream');
 
 /*
  * Configuration
@@ -28,8 +29,8 @@ gulp.task('scss', () =>
         .pipe(gulp.dest(config.output + '/css'))
 );
 
-gulp.task('js', () =>
-    gulp.src(config.source + '/js/**.js')
+/*gulp.task('js', () =>
+    gulp.src(config.source + '/js/!**!/!*.js')
         .pipe(plumber())
         .pipe(babel({
             presets: ['@babel/env']
@@ -37,6 +38,36 @@ gulp.task('js', () =>
         .pipe(minify({
             ext:{
                 src:'-debug.js',
+                min:'.min.js'
+            }
+        }))
+        .pipe(gulp.dest(config.output + '/js'))
+);*/
+
+gulp.task('js', () =>
+    gulp.src(config.source + '/js/main.js')
+        .pipe(plumber())
+        .pipe(webpack({
+            mode: 'development',
+            output: {
+                filename: 'app.js',
+            },
+            module: {
+                rules: [
+                    {
+                        test: /\.(js)$/,
+                        exclude: /(node_modules)/,
+                        loader: 'babel-loader',
+                        query: {
+                            presets: ['@babel/preset-env']
+                        }
+                    }
+                ]
+            }
+        }))
+        .pipe(minify({
+            ext:{
+                src:'.debug.js',
                 min:'.min.js'
             }
         }))
@@ -56,7 +87,7 @@ gulp.task('favicon', () =>
 
 gulp.task('watch', ['js', 'scss'], () => {
     gulp.watch(config.source + '/scss/**/*.scss', ['scss']);
-    gulp.watch(config.output + 'js/*.js', ['js']);
+    gulp.watch(config.source + '/js/**/*.js', ['js']);
 });
 
 gulp.task('build', ['scss', 'js', 'images', 'favicon']);
