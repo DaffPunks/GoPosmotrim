@@ -118,6 +118,10 @@ body {
 
 .current {
 
+  &-wrap {
+
+  }
+
   &-img-wrap {
     padding-left: -$history_padding_box;
     padding-right: -$history_padding_box;

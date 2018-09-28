@@ -6,11 +6,13 @@ var YouTubePlayer = (function () {
     var player,
         doNotSendNextAction = true,  // Because you recived it from another user
         config = {
+            apiKey: 'AIzaSyAipCimbojcWJ4M8Y01NXvu-HYPJl0JOWI',
             videoID:        'oWBDZo3axYg',
-            elementID:      'video',
+            elementID:      'player',
             onPlayerInit:   () => {},   // When player is ready
             onPlayerPause:  () => {},   // When player is paused
             onPlayerPlay:   () => {},   // When player is play
+            onInfoRecieve:  () => {}
         };
 
     /* ============ Private Initialize Methods ============ */
@@ -37,6 +39,7 @@ var YouTubePlayer = (function () {
                 }
             });
 
+            getInfo(config.videoID);
 
         };
     };
@@ -67,6 +70,18 @@ var YouTubePlayer = (function () {
     };
 
 
+    var getInfo = function (videoID) {
+        // https://www.googleapis.com/youtube/v3/videos?part=id%2C+snippet&id=4Y4YSpF6d6w&key=
+
+        fetch(`https://www.googleapis.com/youtube/v3/videos?part=id,snippet,statistics&id=${videoID}&key=${config.apiKey}`)
+            .then(response => response.json())
+            .then(response => {
+                config.onInfoRecieve.call(this, response);
+            })
+            .catch(e => console.log(e));
+    };
+
+
     /* =================== Public Methods ================== */
 
     var setPlayerPause = function () {
@@ -83,6 +98,8 @@ var YouTubePlayer = (function () {
     };
 
     var setPlayerNewVideo = function (videoID) {
+        getInfo(videoID);
+
         player.loadVideoById(videoID);
     };
 
@@ -96,14 +113,24 @@ var YouTubePlayer = (function () {
 
     };
 
+    var update = function (newConfig = null) {
+
+        if (newConfig) {
+            Object.assign(config, newConfig);
+        }
+
+    };
+
 
     /* =============== Export Public Methods =============== */
 
     return {
         init: init,
+        update: update,
         setPlayerPause: setPlayerPause,
         setPlayerPlay: setPlayerPlay,
-        setPlayerNewVideo: setPlayerNewVideo
+        setPlayerNewVideo: setPlayerNewVideo,
+        getInfo: getInfo
     }
 }());
 

@@ -45,9 +45,17 @@ function Sockets(app, server) {
             username: 'Beba'
         }
     ];
-    var currentVideo = 'fIiGraA7wPU';
+    var currentVideo = 'GgAAPPf4z00';
     var history = ['asd', 'zxc'];
 
+
+    db.query('SELECT video_id FROM video ORDER BY id DESC LIMIT 1')
+        .then((resp) => {
+            var lastVideoID = resp.rows[0].video_id;
+            log(`Last video was: ${lastVideoID}`);
+            currentVideo = lastVideoID;
+        })
+        .catch(e => console.error(e));
 
     // CONNECTION
     io.on('connection', function (socket) {
@@ -66,6 +74,7 @@ function Sockets(app, server) {
             db.query('INSERT INTO video(video_id) VALUES($1)', [msg])
                 .then(() => {
                     log('Video added: %s', msg);
+                    currentVideo = msg;
 
                     // Emit GET_VIDEO
                     socket.emit('GET_VIDEO', msg);

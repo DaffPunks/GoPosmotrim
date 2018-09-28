@@ -31,17 +31,6 @@ var Sockets = (function () {
         socket.on("GET_VIDEO_PLAY",     socketGetVideoPlay);
     };
 
-    /**
-     * I'am not sure about this
-     */
-    var initEvents = function () {
-        document.querySelector('#ADD_VIDEO')
-            .addEventListener("submit", (event) => {
-                event.preventDefault();
-                socket.emit('ADD_VIDEO', 'asd');
-            });
-    };
-
 
     /* ============== Private Sockets Methods ============== */
 
@@ -121,7 +110,6 @@ var Sockets = (function () {
         }
 
         initSockets();
-        initEvents();
 
     };
 

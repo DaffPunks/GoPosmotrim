@@ -25,6 +25,6 @@ function Routes(app) {
 
     app.get('/', function (req, res, next) {
         // res.render('pages/index');
-        res.sendFile(path.resolve('views/index.html'));
+        res.sendFile(path.resolve('views/_index.html'));
     });
 }

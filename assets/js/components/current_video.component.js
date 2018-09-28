@@ -1,7 +1,7 @@
 import { el, setStyle } from 'redom';
 
 // define Login component
-export class CurrentVideo {
+export default class CurrentVideo {
 
     constructor () {
         this.el = el('.current',
