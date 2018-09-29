@@ -1,24 +1,23 @@
 body
 {
+  font-family: Source Sans Pro;
+  font-style: normal;
+  font-weight: normal;
+  line-height: normal;
   background-color: #141E39;
 }
 /* GoPosmotrim */
+.sidebar span
+{
+  color: #66ff66;
+}
+
 .sidebar
 {
   background-color: #0D1932;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.25);
   height: 100vh;
-
-}
-.sidebar div span
-{
-  color: green;
-}
-
-.sidebar div
-{
   position: relative;
-  height: 70px;
   left: 0px;
   top: 0px;
   font-family: Source Sans Pro;
@@ -30,24 +29,20 @@ body
   padding-top: 15px;
   text-align: center;
 }
-/* Поиск */
-.header
+/* Search */
+.search
 {
   height: 70px;
   border-bottom: 3px solid #0D1932;
   margin: 0px -15px;
 }
-.header input
+&-input
 {
   position: absolute;
   width: 1000px;
   height: 50px;
   top: 7.5px;
   left: 35px;
-  font-family: Source Sans Pro;
-  font-style: normal;
-  font-weight: normal;
-  line-height: normal;
   font-size: 18px;
   color: white;
   outline: none;
@@ -73,13 +68,48 @@ body
   margin-top: 20px;
 }
 
-/*Кто в онлайне*/
-.users
+/*Online users*/
+.users-online
 {
-  text-align: center;
-  list-style-type: none;
-  width: 100%;
-  color:white;
-  border-bottom: 3px solid #0D1932;
+  padding-bottom: 10px;
+  border-bottom: 3px solid #0E1427 ;
+  font-size: 24px;
+  margin-top: 20px;
+}
+
+.left-column
+{
+  float: left;
+}
+
+.right-column
+{
+  float: right;
+}
+
+ul
+{
+  padding-left: 0px;
   font-size: 20px;
+}
+
+li
+{
+  padding-bottom: 15px;
+  border-bottom: 3px solid #0E1427;
+  padding-top: 10px;
+  list-style-type: none;
+}
+.hvr-fade
+{
+  transition: color 0.4s ease-in-out;
+}
+.hvr-fade:hover
+{
+  color: #66ff66;
+}
+li:after {
+  content: "";
+  clear: both;
+  display: table;
 }

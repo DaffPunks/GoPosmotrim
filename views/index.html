@@ -18,32 +18,37 @@
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Press+Start+2P&amp;subset=cyrillic" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700&amp;subset=cyrillic" rel="stylesheet">
     <!-- Styles -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="/css/normalize.css" title="style" type="text/css" rel="stylesheet">
     <link href="/css/style.css" title="style" type="text/css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700&amp;subset=cyrillic" rel="stylesheet">
 </head>
 <body>
+
  <div class="container-fluid">
      <div class="row">
          <div class="sidebar col-2">
-             <div><span>Go</span>Posmotrim</div>
-                <table class="users">
-                    <tr>
-                        <td>Users Online</td>
-                    </tr>
-                </table>
+             <div class="sidebar-logo"><span>Go</span>Posmotrim</div>
+               <div class="users-online">
+                   Users Online
+               </div>
+                <ul>
+                    <li class="hvr-fade">
+                        <div class="left-column">name</div>
+                        <div class="right-column">time</div>
+                    </li>
+                </ul>
          </div>
          <div class="col-10">
-             <div class="header">
-                 <form class="url" action="" method="get">
-                    <input type="search" name="url" placeholder="Put your link here...">
+             <div class="search">
+                 <form class="search-form" action="" method="get">
+                    <input class="search-input" type="search" name="url" placeholder="Put your link here...">
                  </form>
              </div>
              <div class="row">
                  <div class="video col-8">
-                     VIDIO
+
                  </div>
                  <div class="history col-4">
                      <span>History</span>
@@ -52,12 +57,3 @@
          </div>
      </div>
  </div>
-
-
-<script src="/js/script.js"></script>
-<script>
-    var socket = io();
-    socket.emit('Rofal', {'videoId': 'nahuy idi'});
-</script>
-</body>
-</html>
