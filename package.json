@@ -6,8 +6,7 @@
   "scripts": {
     "start:prod": "node index.js",
     "start:dev": "set DEBUG=sockets & node index.js",
-    "start": "npm run start:prod",
-    "postinstall": "gulp build"
+    "start": "npm run start:dev"
   },
   "dependencies": {
     "debug": "^4.0.1",
