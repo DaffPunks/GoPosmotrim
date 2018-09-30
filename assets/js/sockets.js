@@ -7,7 +7,7 @@ var Sockets = (function () {
     var socket,
         events = {
             onConnected:        () => {}, // When client connecting to the room
-            onNewUserConnected: () => {}, // When somebody else connected to the room
+            onUserListUpdated:  () => {}, // When somebody else connected to the room
             onGetVideo:         () => {},
             onPause:            () => {},
             onPlay:             () => {},
@@ -47,7 +47,7 @@ var Sockets = (function () {
      * @param msg List of users
      */
     var socketUserListUpdated = function (msg) {
-        events.onNewUserConnected.call(this, msg);
+        events.onUserListUpdated.call(this, msg);
     };
 
     /**

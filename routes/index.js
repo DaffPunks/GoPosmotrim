@@ -23,13 +23,13 @@ function Routes(app) {
      * Homepage
      */
 
-    app.get('/', function (req, res, next) {
+    app.get('/new', function (req, res, next) {
         // res.render('pages/index');
         // res.sendFile(path.resolve('views/_index.html'));
         res.sendFile(path.resolve('views/index.html'));
     });
 
-    app.get('/new', function (req, res, next) {
+    app.get('/', function (req, res, next) {
         // res.render('pages/index');
         res.sendFile(path.resolve('views/_index.html'));
         // res.sendFile(path.resolve('views/index.html'));

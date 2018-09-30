@@ -39,7 +39,7 @@ var YouTubePlayer = (function () {
                 }
             });
 
-            getInfo(config.videoID);
+            doEventInfo(config.videoID);
 
         };
     };
@@ -70,19 +70,27 @@ var YouTubePlayer = (function () {
     };
 
 
-    var getInfo = function (videoID) {
+    var doEventInfo = function (videoID) {
         // https://www.googleapis.com/youtube/v3/videos?part=id%2C+snippet&id=4Y4YSpF6d6w&key=
 
         fetch(`https://www.googleapis.com/youtube/v3/videos?part=id,snippet,statistics&id=${videoID}&key=${config.apiKey}`)
             .then(response => response.json())
-            .then(response => {
-                config.onInfoRecieve.call(this, response);
+            .then(json => {
+                config.onInfoRecieve.call(this, json);
             })
             .catch(e => console.log(e));
     };
 
 
     /* =================== Public Methods ================== */
+
+    var getInfo = function (videoID) {
+        // https://www.googleapis.com/youtube/v3/videos?part=id%2C+snippet&id=4Y4YSpF6d6w&key=
+
+        return fetch(`https://www.googleapis.com/youtube/v3/videos?part=id,snippet,statistics&id=${videoID}&key=${config.apiKey}`)
+            .then(response => response.json())
+            .catch(e => console.log(e));
+    };
 
     var setPlayerPause = function () {
         doNotSendNextAction = true;
@@ -98,7 +106,7 @@ var YouTubePlayer = (function () {
     };
 
     var setPlayerNewVideo = function (videoID) {
-        getInfo(videoID);
+        doEventInfo(videoID);
 
         player.loadVideoById(videoID);
     };
@@ -130,7 +138,8 @@ var YouTubePlayer = (function () {
         setPlayerPause: setPlayerPause,
         setPlayerPlay: setPlayerPlay,
         setPlayerNewVideo: setPlayerNewVideo,
-        getInfo: getInfo
+        doEventInfo: doEventInfo,
+        getInfo: getInfo,
     }
 }());
 

@@ -10,8 +10,8 @@ export default class CurrentVideo {
             ),
             this.title = el('.current-title'),
             el('.current-btns',
-                el('.current-button.plus'),
-                el('.current-button.skip'),
+                // el('.current-button.plus'),
+                // el('.current-button.skip'),
             ),
         );
     }

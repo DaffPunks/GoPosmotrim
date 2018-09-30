@@ -33,53 +33,50 @@ module.exports = Sockets;
  */
 
 function Sockets(app, server) {
-    var io      = sio.listen(server),
-        config  = app.get('config'),
-        db      = app.get('postgresClient');
+    var io              = sio.listen(server),
+        config          = app.get('config'),
+        dbController    = app.get('databaseController');
 
-    var userList = [
-        {
-            username: 'Daff'
-        },
-        {
-            username: 'Beba'
-        }
-    ];
-    var currentVideo = 'GgAAPPf4z00';
-    var history = ['asd', 'zxc'];
+    var userList = [];
+    var currentVideo = '';
+    var history = ['asd', 'zxc']; // TODO: make history
 
+    dbController.getLastVideo()
+        .then((msg => {
+            console.log('Last Video: ', msg);
+            currentVideo = msg;
+        }))
+        .catch(e => log('Error: ', e));
 
-    db.query('SELECT video_id FROM video ORDER BY id DESC LIMIT 1')
-        .then((resp) => {
-            var lastVideoID = resp.rows[0].video_id;
-            log(`Last video was: ${lastVideoID}`);
-            currentVideo = lastVideoID;
-        })
-        .catch(e => console.error(e));
 
     // CONNECTION
     io.on('connection', function (socket) {
         log('Connected user %s', socket.id);
 
+        var username = socket.id.slice(0, 5);
+
+        userList.push({
+            username: username
+        });
+
         // Emit ROOM_INFO
         socket.emit('ON_CONNECTED', {userList: userList, video: currentVideo, history: history});
 
         // Broadcast USER_LIST UPDATED
-        socket.broadcast.emit('USER_LIST_UPDATED');
+        socket.broadcast.emit('USER_LIST_UPDATED', userList);
 
         // On ADD_VIDEO
-        socket.on('ADD_VIDEO', (msg) => {
-            log('Attempt to add new video: %s', msg);
+        socket.on('ADD_VIDEO', (videoID) => {
+            log('Attempt to add new video: %s', videoID);
 
-            db.query('INSERT INTO video(video_id) VALUES($1)', [msg])
+            dbController.insertVideo(videoID)
                 .then(() => {
-                    log('Video added: %s', msg);
-                    currentVideo = msg;
+                    currentVideo = videoID;
 
                     // Emit GET_VIDEO
-                    socket.emit('GET_VIDEO', msg);
+                    socket.emit('GET_VIDEO', videoID);
                 })
-                .catch(e => console.error(e))
+                .catch(e => log('Error: ', e));
         });
 
         // On GET_VIDEO_PAUSE
@@ -94,7 +91,11 @@ function Sockets(app, server) {
             socket.broadcast.emit('GET_VIDEO_PLAY', time);
         });
 
+        socket.on('disconnect', () => {
+            userList = userList.filter((user) => user.username !== username);
 
+            socket.broadcast.emit('USER_LIST_UPDATED', userList);
+        })
 
 
     });

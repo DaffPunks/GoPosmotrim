@@ -8,7 +8,8 @@ import YoutubePlayer from './youtube.player';
 import SearchDOM from './components/search.component';
 import CurrentVideo from './components/current_video.component';
 import Video from './components/video.component';
-import { mount } from 'redom';
+import User from './components/userlist.component';
+import { list, mount } from 'redom';
 
 
 var GoPosmotrim = (function () {
@@ -16,7 +17,7 @@ var GoPosmotrim = (function () {
     const domSearch = new SearchDOM();
     const domCurrentVideo = new CurrentVideo();
     const domVideo = new Video();
-
+    const domuserList = list('ul', User);
 
     /**
      * Initialize Socket.IO in application
@@ -27,6 +28,7 @@ var GoPosmotrim = (function () {
         mount(document.querySelector('.header'), domSearch);
         mount(document.querySelector('.current-wrap'), domCurrentVideo);
         mount(document.querySelector('.video-component'), domVideo);
+        mount(document.querySelector('.userlist-component'), domuserList);
 
     };
 
@@ -37,11 +39,23 @@ var GoPosmotrim = (function () {
         console.log('initSockets');
 
         Sockets.init({
-            onConnected: onSocketConnect
+            onConnected: onSocketConnect,
+            onUserListUpdated: onSocketUserListUpdated
         });
 
         domSearch.onSubmit((value) => {
-            Sockets.addNewVideo(Utils.getYoutubeID(value));
+            var videoID = Utils.getYoutubeID(value);
+
+            YoutubePlayer.getInfo(videoID)
+                .then(resp => {
+                    if (resp.items.length === 0) {
+                        console.log('On_Submit: ', 'There is no video with id ', value);
+                    } else {
+                        Sockets.addNewVideo(videoID);
+                    }
+
+
+                });
         });
     };
 
@@ -53,6 +67,8 @@ var GoPosmotrim = (function () {
 
         console.log('ON_CONNECTED', msg);
 
+        onSocketUserListUpdated(msg.userList);
+
         YoutubePlayer.init({
             videoID: msg.video,
             onPlayerInit: onPlayerInitialize,
@@ -61,17 +77,18 @@ var GoPosmotrim = (function () {
             onInfoRecieve: onUpdateVideo
         });
 
-
     };
 
     /**
      * Update DOM objects when video is updated
      */
     var onUpdateVideo = function (json) {
+        console.log('JSON', json);
+
         var title = json.items[0].snippet.title;
-        var imageUrl = json.items[0].snippet.thumbnails.maxres.url;
+        var imageUrl = json.items[0].snippet.thumbnails.standard.url;
         var channel = json.items[0].snippet.channelTitle;
-        var views = json.items[0].statistics.viewCount;
+        var views = Utils.makeSpaceForViwes(json.items[0].statistics.viewCount);
 
         console.log(imageUrl, title);
         domCurrentVideo.update(imageUrl, title);
@@ -92,11 +109,22 @@ var GoPosmotrim = (function () {
         });
     };
 
+    /**
+     *
+     * @param msg
+     */
     var onSocketGetVideo = function (msg) {
         YoutubePlayer.setPlayerNewVideo(msg);
-        YoutubePlayer.getInfo(msg);
+        YoutubePlayer.doEventInfo(msg);
     };
 
+    /**
+     * When new user
+     * @param list
+     */
+    var onSocketUserListUpdated = function (list) {
+        domuserList.update(list);
+    };
 
     /* =================== Public Methods ================== */
 

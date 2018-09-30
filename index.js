@@ -30,8 +30,13 @@ exports.server = require('http')
         console.log('GoPosmotrim started on http://localhost:%d/', app.get('port'));
     });
 
+
+/*
+ * Database Wrap
+ */
+exports.app.set('databaseController', require('./database')(app));
+
 /*
  * Socket.io
  */
-
 require('./sockets/sockets')(app, exports.server);

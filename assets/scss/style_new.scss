@@ -72,6 +72,10 @@ body {
   margin-top: 20px;
 }
 
+.video-component {
+  padding-left: 30px;
+}
+
 .video {
   font-weight: 600;
   line-height: 1.2;
@@ -142,6 +146,7 @@ body {
     background-size: cover;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
+    background-position: center;
   }
 
   &-title {

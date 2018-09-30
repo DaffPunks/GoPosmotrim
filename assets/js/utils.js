@@ -25,11 +25,16 @@ export default (function () {
         return ID;
     };
 
+    var makeSpaceForViwes = function (number) {
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    };
+
 
     /* =============== Export Public Methods =============== */
 
     return {
-        getYoutubeID: getYoutubeID
+        getYoutubeID: getYoutubeID,
+        makeSpaceForViwes: makeSpaceForViwes
     }
 
 }());
