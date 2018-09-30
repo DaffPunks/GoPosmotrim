@@ -74,7 +74,7 @@ function Sockets(app, server) {
                     currentVideo = videoID;
 
                     // Emit GET_VIDEO
-                    socket.emit('GET_VIDEO', videoID);
+                    io.emit('GET_VIDEO', videoID);
                 })
                 .catch(e => log('Error: ', e));
         });

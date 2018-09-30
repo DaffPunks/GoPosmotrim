@@ -83,14 +83,12 @@ var GoPosmotrim = (function () {
      * Update DOM objects when video is updated
      */
     var onUpdateVideo = function (json) {
-        console.log('JSON', json);
 
         var title = json.items[0].snippet.title;
-        var imageUrl = json.items[0].snippet.thumbnails.standard.url;
+        var imageUrl = getVideoThumbnail(json.items[0].snippet.thumbnails);
         var channel = json.items[0].snippet.channelTitle;
         var views = Utils.makeSpaceForViwes(json.items[0].statistics.viewCount);
 
-        console.log(imageUrl, title);
         domCurrentVideo.update(imageUrl, title);
         domVideo.update(title, channel, views);
     };
@@ -124,6 +122,19 @@ var GoPosmotrim = (function () {
      */
     var onSocketUserListUpdated = function (list) {
         domuserList.update(list);
+    };
+
+    /**
+     *
+     */
+    var getVideoThumbnail = function (thumbnails) {
+        if (thumbnails.maxres) {
+            return thumbnails.maxres.url
+        } else if (thumbnails.standard) {
+            return thumbnails.standard.url
+        } else {
+            return thumbnails.medium.url
+        }
     };
 
     /* =================== Public Methods ================== */

@@ -21,7 +21,7 @@ var Sockets = (function () {
     var initSockets = function () {
         socket = io();
 
-        console.log('Connected');
+        console.log('Successfuly connected');
 
         // List of events
         socket.on("ON_CONNECTED",       socketOnConnected);
@@ -55,6 +55,7 @@ var Sockets = (function () {
      * @param msg New video ID
      */
     var socketGetVideo = function (msg) {
+        console.log('GET_VIDEO', msg);
         events.onGetVideo.call(this, msg);
     };
 
@@ -82,6 +83,7 @@ var Sockets = (function () {
      * @param videoID New video ID
      */
     var addNewVideo = function (videoID) {
+        console.log("ADD_VIDEO", videoID);
         socket.emit('ADD_VIDEO', videoID);
     };
 
