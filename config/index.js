@@ -29,6 +29,18 @@ function Config(app) {
         config = require('./config.json');
         log('Loaded from config.json');
     } catch (err) {
+        config = {
+            postgresql: {
+                host: process.env.DATABASE_HOST,
+                database: process.env.DATABASE_NAME,
+                user: process.env.DATABASE_USER,
+                password: process.env.DATABASE_PASSWORD,
+                port: process.env.DATABASE_PORT
+            },
+            app: {
+                port: 443
+            }
+        };
         log("Failed to load file config.json");
     }
 
