@@ -38,7 +38,7 @@ function Config(app) {
                 port: process.env.DATABASE_PORT
             },
             app: {
-                port: 443
+                port: process.env.PORT
             }
         };
         log("Failed to load file config.json");
