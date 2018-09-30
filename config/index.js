@@ -35,8 +35,9 @@ function Config(app) {
     log('Save configuration values in app');
     app.set('config', config);
 
-    log('Setting port as %d', config.app.port);
-    app.set('port', config.app.port);
+    var port = config.app.port || 5000;
+    log('Setting port as %d', port);
+    app.set('port', port);
 
     log('Setting view engine as %s', 'pug');
     app.set('view engine', 'pug');
