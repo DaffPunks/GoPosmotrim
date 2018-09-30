@@ -1,0 +1,42 @@
+.sidebar {
+  background-color: $sidebar_background_color;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.25);
+  height: 100vh;
+  position: relative;  // We don't even need to use position relative
+  left: 0px;  // position: relative; doesn't work with 'top', 'left' and etc.
+  top: 0px;   // Delete it
+
+  // We can move it to .sidebar-logo
+  //font-size: 34px;
+  //color: white;
+  //padding-top: 15px;
+  //text-align: center;
+
+  /*
+  * It will be better to create another rule for .sidebar-logo
+  */
+
+  &-logo {
+    font-size: 34px; // Check again font-size from https://figma.com/
+
+    color: white; // It's regular color, that aplies for any text on the page, so it's useless
+
+    padding-top: 15px;  // Check https://css-tricks.com/centering-css-complete-guide/ again. We can use Flexbox.
+    text-align: center; // So rework it
+  }
+
+  // Place it under .sidebar-logo selector
+  span {
+    color: #66ff66;
+  }
+}
+
+// This component
+/*
+<div class="sidebar col-2">
+   <div class="sidebar-logo">
+     <span>Go</span>Posmotrim
+   </div>
+   ...
+</div>
+*/

@@ -18,67 +18,168 @@
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Press+Start+2P&amp;subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700&amp;subset=cyrillic" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700&amp;subset=cyrillic"
+          rel="stylesheet">
     <!-- Styles -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link href="/css/normalize.css" title="style" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="/css/normalize.css" title="style" type="text/css" rel="stylesheet"> <!-- Don't use it anymore, bcause we import this file into base/_index.scss -->
     <link href="/css/style.css" title="style" type="text/css" rel="stylesheet">
 </head>
 <body>
 
- <div class="container-fluid">
-     <div class="row">
-         <div class="sidebar col-2">
-             <div class="sidebar-logo"><span>Go</span>Posmotrim</div>
-               <div class="users-online">
-                   Users Online
-               </div>
-                <ul>
-                    <li class="user-list">
-                        <div class="left-column">name</div>
-                        <div class="right-column">time</div>
-                    </li>
-                </ul>
-         </div>
-         <div class="col-10">
-             <div class="search">
-                 <form class="search-form" action="" method="get">
+<div class="container-fluid">
+    <div class="row">
+
+
+
+        <div class="sidebar col-2">
+            <div class="sidebar-logo">
+                <span>Go</span>Posmotrim
+            </div>
+            <!-- Wrap it with 'div.users-component'. Why? Read below. -->
+            <!-- And wrap it in BLOCK. Blockname: '.users' -->
+            <div class="users-online">
+                Users Online
+            </div>
+            <ul>
+                <li class="user-list">
+                    <div class="left-column">name</div>
+                    <div class="right-column">time</div>
+                </li>
+            </ul>
+        </div>
+
+
+
+
+        <div class="col-10">
+
+
+            <!-- There should be header wrap like this <div class="header"> -->
+            <div class="search">
+                <form class="search-form" action="" method="get">
                     <input class="search-input" type="search" name="url" placeholder="Put your link here...">
-                 </form>
-             </div>
-             <div class="row">
-                 <div class="video col-8">
-                     <div class="video-player">
-                         <iframe src="https://www.youtube.com/embed/GHy1E7SkGgU" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                     </div>
-                     <div class="video-title"> *Video Title* </div>
-                     <div class="video-sub"> *Video Sub*</div>
-                        <div class="video-views">70000000000 Views</div>
-                        <div class="video-author">*Author*</div>
-                 </div>
-                 <div class="history-column col-4">
-                     <div class="current-video">
-                         <div class="current-video-wrap" style="background-image: url('https://i.ytimg.com/vi_webp/GgAAPPf4z00/maxresdefault.webp')"></div>
-                     </div>
-                     <div class="current-video-title">*Title*</div>
-                     <div class="current-video-btns">
-                         <div class="current-button-skip"></div>
-                     </div>
+                </form>
+            </div>
 
-                     <div class="history">
-                         <div class="history-title">History</div>
-                            <ul>
-                                 <li class="history-list">
-                                 Вот тут прям список видосов разных прям огромный
-                                </li>
-                            </ul>
-                     </div>
-                 </div>
 
-             </div>
-         </div>
-     </div>
- </div>
- <script src="/js/app.min.js"></script>
+
+            <div class="row">
+
+
+
+
+
+
+                <div class="video col-8">
+                    <div class="video-player">
+                        <iframe src="https://www.youtube.com/embed/GHy1E7SkGgU" frameborder="0"
+                                allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-title"> *Video Title*</div>
+                    <!--
+                       '.video-sub' mean Video Subtitle.
+                       You should wrap views and author in '.video-sub'.
+                       Look at figma.com once more
+                     -->
+                    <div class="video-sub"> *Video Sub*</div>
+                    <div class="video-views">70000000000 Views</div>
+                    <div class="video-author">*Author*</div>
+                </div>
+
+
+
+
+
+
+
+                <!--
+                   Let's name this block '.modal'
+                   Below you can find Old and New version
+                -->
+                <!-- Old version -->
+                <div class="history-column col-4">
+                    <!--
+                       When you write something like *-wrap
+                       it's mean container for something without wrap.
+                       Like yobanaya konfetnaya obertka
+                       '.current-video-wrap' wrap '.current-video'
+                       Not the other way
+                     -->
+                    <div class="current-video">
+                        <div class="current-video-wrap"
+                             style="background-image: url('https://i.ytimg.com/vi_webp/GgAAPPf4z00/maxresdefault.webp')"></div>
+                    </div>
+                    <!--
+                       Blockname: .current
+                       So element name should be: .current-title
+                     -->
+                    <div class="current-video-title">*Title*</div>
+                    <div class="current-video-btns">
+                        <!-- There is a lil bulshit like modificator, but later -->
+                        <div class="current-button-skip"></div>
+                    </div>
+
+                    <div class="history">
+                        <div class="history-title">History</div>
+                        <ul>
+                            <li class="history-list">
+                                Вот тут прям список видосов разных прям огромный
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- New version. Pay attention to 'hidden'. Look at state/_index.scss -->
+                <div class="col-4 hidden">
+                    <div class="modal">
+                        <!--
+                           BULLSHIT ABOUT &-COMPONENT HERE.
+                           As you can see, there is new shit like *-component
+                           Bcause i need a separate container for mounting Dynamical Components
+                           I will tell you everything IRL
+                         -->
+                        <div class="current-component">
+                            <div class="current">
+                                <div class="current-video-wrap">
+                                    <div class="current-video"
+                                         style="background-image: url('https://i.ytimg.com/vi_webp/GgAAPPf4z00/maxresdefault.webp')"></div>
+                                </div>
+                                <div class="current-title">*Title*</div>
+                                <div class="current-btns">
+                                    <div class="current-button-skip"></div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="history">
+                        <div class="history-title">History</div>
+                        <!-- <ul> should be .history-list , bcause it mean (U)nsorted(L)ist  -->
+                        <ul>
+                            <!-- And <li> should be .history-item , bcause (L)ist(I)tem -->
+                            <li class="history-list">
+                                Вот тут прям список видосов разных прям огромный
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/js/app.min.js"></script>
 </body>
+<!--
+    WTF??? Head?
+-->
 </head>

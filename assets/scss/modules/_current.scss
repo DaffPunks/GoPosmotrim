@@ -1,0 +1,43 @@
+/*
+* Start from HTML, then go back
+* Place everything under .current selector
+* Rework.
+*/
+
+.current-video-wrap
+{
+  position: relative;
+  width: calc(100% + 30px);
+  padding-top: 56.25%;
+  padding-left: -$history_padding_box;
+  padding-right: -$history_padding_box;
+  margin-left: -$history_padding_box;
+  margin-right: -$history_padding_box;
+  background-size: cover;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+.current-video-title
+{
+  position: relative;
+  color: white;
+  font-size: 20px;
+  width: 100%;
+  word-wrap: break-word;
+  text-align: left;
+  padding: 10px;
+}
+.current-video-btns
+{
+  padding: 10px;
+}
+.current-button-skip
+{
+  background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTYuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjI0cHgiIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAwIDQ1OSA0NTkiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDQ1OSA0NTk7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPGc+Cgk8ZyBpZD0ic2hhcmUiPgoJCTxwYXRoIGQ9Ik00NTksMjE2Ljc1TDI4MC41LDM4LjI1djEwMmMtMTc4LjUsMjUuNS0yNTUsMTUzLTI4MC41LDI4MC41QzYzLjc1LDMzMS41LDE1MywyOTAuNywyODAuNSwyOTAuN3YxMDQuNTVMNDU5LDIxNi43NXoiIGZpbGw9IiNGRkZGRkYiLz4KCTwvZz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K);
+  border: 1px solid #ffffff;
+  position: relative;
+  height: 22px;
+  width: 22px;
+  margin-right: 6px;
+  margin-left: 10px;
+}

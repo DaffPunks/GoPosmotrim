@@ -1,0 +1,27 @@
+/* Search */
+.search
+{
+  height: 70px;
+  border-bottom: 3px solid #0D1932; // Border-bottom is 1px height
+  margin: 0px -15px;  // Now, look at layout/_index.scss . We have a special class to make components fullwidth
+                      // So you can delete it and add class to html
+}
+
+// Place it under '.search' selector. You know
+.search-input
+{
+  position: absolute;   // We don't need position: absolute
+  width: 1000px;   // Bullshit, bcause on screens less then 1000px width it will be look awful
+  height: 50px;
+  top: 7.5px;           // The same for pos: abolute
+  left: 35px;           //
+  font-size: 18px;
+  color: white;
+  outline: none;
+  background-color: transparent;
+  border: none;
+
+  &::placeholder {
+    color: rgba(255, 255, 255, .5);
+  }
+}

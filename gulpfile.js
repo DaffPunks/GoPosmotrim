@@ -21,7 +21,7 @@ const config = {
 
 
 gulp.task('scss', () =>
-    gulp.src(config.source + '/scss/**.scss')
+    gulp.src(config.source + '/scss/*.scss')
         .pipe(plumber())
         .pipe(sass().on('error', sass.logError))
         .pipe(autoprefixer({browsers: ['> 1%', 'last 2 versions', 'Firefox ESR']}))

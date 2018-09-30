@@ -1,0 +1,61 @@
+/*
+* First of all look at the HTML.
+*/
+
+.users-online
+{
+  padding-bottom: 10px;
+  border-bottom: 3px solid #0E1427 ;
+  font-size: 24px;
+  margin-top: 20px;
+}
+
+.left-column
+{
+  float: left;
+}
+
+.right-column
+{
+  float: right;
+}
+
+ul // Give a class insted of using tag
+{
+  padding-left: 0px;
+  font-size: 20px;
+}
+
+li // Give a class insted of using tag
+{
+  padding-bottom: 15px;
+  border-bottom: 3px solid #0E1427;
+  padding-top: 10px;
+  list-style-type: none;
+}
+
+/*
+* Would be better if you will write:
+*
+*     .user-list {
+*       &:hover {
+*       }
+*     }
+*
+*/
+.user-list
+{
+  transition: color 0.4s ease-in-out;
+}
+.user-list:hover
+{
+  // We have a variable for green color
+  color: #2bff30;
+}
+
+
+li:after {
+  content: "";
+  clear: both;
+  display: table;
+}
