@@ -32,7 +32,7 @@ var YouTubePlayer = (function () {
                 height: '100%',
                 width: '100%',
                 videoId: config.videoID,
-                playerVars: {autoplay: 1, rel: 0},
+                playerVars: {autoplay: 1, rel: 0, color: 'white'},
                 events: {
                     'onReady': config.onPlayerInit,
                     'onStateChange': onPlayerEvent
