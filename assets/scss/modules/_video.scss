@@ -1,58 +1,38 @@
-/*
-* First of all, place everything under '.video' selector
-*/
-
 .video
 {
-  color: white; // Don't need it
-}
+  padding-left: 30px;
 
-.video-player
-{
-  position: relative;
-  width: 100%;
-  padding-top: 56.25%;
-}
+  &-player{
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%;
 
-.video-player iframe
-{
-  padding-top: $history_padding_box;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.video-title
-{
-  position: relative; // useless style
-  width: 100%;
-  font-size: 26px;
-  padding-top: 10px;
-  word-wrap: break-word;
-}
-
-.video-sub // Rework it.
-{
-  font-size: 20px;
-  position: relative;
-  width: 85%;
-  word-wrap: break-word;
-  float: left;
-}
-
-.video-views
-{
-  color: hsl(0, 0%, 53%); // wtf?
-  position: relative;
-  font-size: 18px;
-  float: right;
-}
-
-.video-author
-{
-  position: relative;
-  width: 100%;
-  float: left;
+    iframe{
+      padding-top: $history_padding_box;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+  &-title{
+    width: 100%;
+    font-size: 26px;
+    padding-top: 10px;
+    word-wrap: break-word;
+  }
+  &-sub{
+    font-size: 20px;
+    width: 100%;
+    word-wrap: break-word;
+    float: left;
+    &-views{
+      font-size: 18px;
+      float: right;
+    }
+    &-author{
+      width: 100%;
+    }
+  }
 }

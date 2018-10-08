@@ -1,7 +1,7 @@
 {
   "name": "go-posmotrim",
   "description": "Let's watch it together",
-  "author": "Alex Daff & Klim Baklusha",
+  "author": "Alex Daff & Klim Milk",
   "version": "0.2.0",
   "scripts": {
     "start:prod": "node index.js",

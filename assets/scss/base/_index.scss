@@ -1,13 +1,12 @@
 /*
  * Base
  */
-
 @import "normalize";
 
 body {
   font-family: Source Sans Pro, sans-serif;
   background-color: $main_background_color;
-  // you should add 'color: #ffffff', but don't forget about variables
+  color: $primary_font_color;
 }
 
 a, a:link, a:hover, a:active, a:visited {

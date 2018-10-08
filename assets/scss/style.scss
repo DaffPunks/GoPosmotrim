@@ -1,17 +1,24 @@
+
+/*Utils*/
 @import "utils/variables";
 @import "utils/fonts";
 @import "utils/utils";
 
+/*base*/
 @import "base/index";
 
+/*state*/
 @import "state/index";
 
+/*layout*/
 @import "layout/index";
 
+/*modules*/
 @import "modules/current";
 @import "modules/history";
 @import "modules/search";
 @import "modules/sidebar";
 @import "modules/users";
 @import "modules/video";
+@import "modules/panel";
 

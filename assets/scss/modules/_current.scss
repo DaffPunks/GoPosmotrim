@@ -1,9 +1,42 @@
-/*
-* Start from HTML, then go back
-* Place everything under .current selector
-* Rework.
-*/
 
+.current {
+  padding: 0 15px;
+
+  &-video-wrap{
+    width: calc(100% + 30px);
+    padding-top: 61%; /* 16:9 Aspect Ratio */
+    position: relative; /* If you want text inside of it */
+    padding-left: -$history_padding_box;
+    padding-right: -$history_padding_box;
+    margin-left: -$history_padding_box;
+    margin-right: -$history_padding_box;
+  }
+  &-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+
+    background-size: cover;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    background-position: center;
+
+    &-title{
+      font-size: 18px;
+      font-weight: 600;
+      padding: 10px 0;
+      word-wrap: break-word;
+      text-align: left;
+
+    }
+  }
+
+
+}
+
+/*
 .current-video-wrap
 {
   position: relative;
@@ -41,3 +74,4 @@
   margin-right: 6px;
   margin-left: 10px;
 }
+*/
