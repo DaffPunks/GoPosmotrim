@@ -4,7 +4,7 @@ export class User {
     constructor (user) {
         this.el = el('li.users-item',
             this.name = el('.users-name'),
-            this.time = el('.users-time', 0)
+            this.time = el('.users-time', ' ')
         );
     }
     update (user) {
