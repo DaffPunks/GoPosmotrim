@@ -1,14 +1,19 @@
-.video
-{
+.video-component {
   padding-left: 30px;
+  margin-top: 15px;
+}
 
-  &-player{
+.video {
+  font-weight: 600;
+  line-height: 1.2;
+
+  &-wrap {
     position: relative;
     width: 100%;
-    padding-top: 56.25%;
+    height: 0;
+    padding-bottom: 56.25%;
 
-    iframe{
-      padding-top: $history_padding_box;
+    iframe {
       position: absolute;
       top: 0;
       left: 0;
@@ -16,23 +21,20 @@
       height: 100%;
     }
   }
-  &-title{
-    width: 100%;
-    font-size: 26px;
-    padding-top: 10px;
-    word-wrap: break-word;
+
+  &-title {
+    font-size: 30px;
   }
-  &-sub{
-    font-size: 20px;
-    width: 100%;
-    word-wrap: break-word;
+
+  &-sub {
+    font-size: 18px;
+  }
+
+  &-author {
     float: left;
-    &-views{
-      font-size: 18px;
-      float: right;
-    }
-    &-author{
-      width: 100%;
-    }
+  }
+
+  &-views {
+    float: right;
   }
 }

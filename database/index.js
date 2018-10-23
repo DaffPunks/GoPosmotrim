@@ -41,8 +41,20 @@ function DatabaseController(app) {
 
     };
 
+    var getLastTenVideos = function () {
+        return new Promise(function (resolve, reject) {
+            dbworker.query('SELECT video_id FROM video ORDER BY id DESC LIMIT 10')
+                .then((resp) => {
+                    var lastVideoID = resp.rows;
+                    resolve(lastVideoID);
+                })
+                .catch(e => reject(e));
+        })
+    };
+
     return {
         getLastVideo: getLastVideo,
-        insertVideo: insertVideo
+        insertVideo: insertVideo,
+        getLastTenVideos: getLastTenVideos
     }
 }

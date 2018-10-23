@@ -8,16 +8,20 @@ import YoutubePlayer from './youtube.player';
 import SearchDOM from './components/search.component';
 import CurrentVideo from './components/current_video.component';
 import Video from './components/video.component';
-import User from './components/userlist.component';
-import { list, mount } from 'redom';
+import {UserList} from './components/userlist.component';
+import {HistoryList} from './components/history.component';
+import { mount } from 'redom';
 
 
 var GoPosmotrim = (function () {
 
+    var historyList = [];
+
     const domSearch = new SearchDOM();
     const domCurrentVideo = new CurrentVideo();
     const domVideo = new Video();
-    const domuserList = list('ul', User);
+    const domUserList = new UserList();
+    const domHistoryList = new HistoryList();
 
     /**
      * Initialize Socket.IO in application
@@ -25,10 +29,11 @@ var GoPosmotrim = (function () {
     var initDOM = function () {
         console.log('initDOM');
 
-        mount(document.querySelector('.header'), domSearch);
-        mount(document.querySelector('.current-wrap'), domCurrentVideo);
+        mount(document.querySelector('.search-component'), domSearch);
+        mount(document.querySelector('.current-component'), domCurrentVideo);
         mount(document.querySelector('.video-component'), domVideo);
-        mount(document.querySelector('.userlist-component'), domuserList);
+        mount(document.querySelector('.users-component'), domUserList);
+        mount(document.querySelector('.history-component'), domHistoryList);
 
     };
 
@@ -52,8 +57,8 @@ var GoPosmotrim = (function () {
                         console.log('On_Submit: ', 'There is no video with id ', value);
                     } else {
                         Sockets.addNewVideo(videoID);
+                        // putVideoInHistory(resp, true);
                     }
-
 
                 });
         });
@@ -68,6 +73,8 @@ var GoPosmotrim = (function () {
         console.log('ON_CONNECTED', msg);
 
         onSocketUserListUpdated(msg.userList);
+
+        onVideoListUpdated(msg.history);
 
         YoutubePlayer.init({
             videoID: msg.video,
@@ -88,6 +95,8 @@ var GoPosmotrim = (function () {
         var imageUrl = getVideoThumbnail(json.items[0].snippet.thumbnails);
         var channel = json.items[0].snippet.channelTitle;
         var views = Utils.makeSpaceForViwes(json.items[0].statistics.viewCount);
+
+        console.log('WTF');
 
         domCurrentVideo.update(imageUrl, title);
         domVideo.update(title, channel, views);
@@ -114,6 +123,9 @@ var GoPosmotrim = (function () {
     var onSocketGetVideo = function (msg) {
         YoutubePlayer.setPlayerNewVideo(msg);
         YoutubePlayer.doEventInfo(msg);
+        YoutubePlayer.getInfo(msg)
+            .then(json => putVideoInHistory(json, true));
+
     };
 
     /**
@@ -121,7 +133,44 @@ var GoPosmotrim = (function () {
      * @param list
      */
     var onSocketUserListUpdated = function (list) {
-        domuserList.update(list);
+        domUserList.update(list);
+    };
+
+    /**
+     * When new user
+     * @param list
+     */
+    var onVideoListUpdated = function (list) {
+        console.log(list);
+
+        let promisesArray = [];
+
+        list.forEach((item) => {
+            promisesArray.push(YoutubePlayer.getInfo(item.video_id));
+        });
+
+        Promise.all(promisesArray).then(values => values.map(item => putVideoInHistory(item)));
+    };
+
+    var putVideoInHistory = function (json, onTop = false) {
+
+        let item = {
+            id: json.items[0].id,
+            title: json.items[0].snippet.title,
+            image: getVideoThumbnail(json.items[0].snippet.thumbnails)
+        };
+
+        if (onTop) {
+            historyList.unshift(item);
+        } else {
+            historyList.push(item);
+        }
+
+
+        domHistoryList.update(historyList);
+        domHistoryList.onClick((videoID) => {
+            Sockets.addNewVideo(videoID);
+        })
     };
 
     /**
@@ -140,10 +189,8 @@ var GoPosmotrim = (function () {
     /* =================== Public Methods ================== */
 
     var init = function () {
-
         initDOM();
         initSockets();
-
     };
 
     /* =============== Run application =============== */

@@ -5,10 +5,10 @@ export default class CurrentVideo {
 
     constructor () {
         this.el = el('.current',
-            el('.current-video-wrap',
-                this.image = el('.current-video')
+            el('.current-img-wrap',
+                this.image = el('.current-img')
             ),
-            this.title = el('.current-video-title'),
+            this.title = el('.current-title'),
             el('.current-btns',
                 // el('.current-button.plus'),
                 // el('.current-button.skip'),

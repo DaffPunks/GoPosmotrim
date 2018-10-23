@@ -5,20 +5,22 @@ export default class SearchDOM {
     constructor () {
 
         // Initialize objects
-        this.el = el('form.header-search',
-            this.search = el('input.header-input', { type: 'text', placeholder: 'Search for a video...' }),
+        this.el = el('.search',
+            this.form = el('form.search-form',
+                this.input = el('input.search-input', { type: 'text', placeholder: 'Search for a video...' }),
+            )
         );
 
     }
 
     onSubmit(callback) {
         // Add event listener
-        this.el.onsubmit = e => {
+        this.form.onsubmit = e => {
             e.preventDefault();
 
-            callback(this.search.value);
+            callback(this.input.value);
 
-            this.search.value = '';
+            this.input.value = '';
         }
     }
 }

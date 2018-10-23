@@ -39,7 +39,7 @@ function Sockets(app, server) {
 
     var userList = [];
     var currentVideo = '';
-    var history = ['asd', 'zxc']; // TODO: make history
+    var history = []; // TODO: make history
 
     dbController.getLastVideo()
         .then((msg => {
@@ -59,8 +59,14 @@ function Sockets(app, server) {
             username: username
         });
 
-        // Emit ROOM_INFO
-        socket.emit('ON_CONNECTED', {userList: userList, video: currentVideo, history: history});
+        dbController.getLastTenVideos()
+            .then(data => {
+                history = data;
+                // Emit ROOM_INFO
+                socket.emit('ON_CONNECTED', {userList: userList, video: currentVideo, history: history});
+            });
+
+
 
         // Broadcast USER_LIST UPDATED
         socket.broadcast.emit('USER_LIST_UPDATED', userList);
@@ -68,6 +74,9 @@ function Sockets(app, server) {
         // On ADD_VIDEO
         socket.on('ADD_VIDEO', (videoID) => {
             log('Attempt to add new video: %s', videoID);
+
+            if (currentVideo == videoID)
+                return;
 
             dbController.insertVideo(videoID)
                 .then(() => {

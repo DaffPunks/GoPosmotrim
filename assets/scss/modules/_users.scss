@@ -5,9 +5,10 @@
   &-online {
     padding-left: 10px;
     padding-bottom: 10px;
-    border-bottom: 3px solid #0E1427;
-    font-size: 24px;
+    border-bottom: 1px solid #0E1427;
+    font-size: 18px;
     margin-top: 20px;
+    font-weight: 600;
   }
   &-name {
     float: left;
@@ -23,9 +24,11 @@
   }
   &-item {
     padding-bottom: 15px;
-    border-bottom: 3px solid #0E1427;
+    border-bottom: 1px solid #0E1427;
     padding-top: 10px;
     list-style-type: none;
+    font-size: 16px;
+    cursor: default;
 
     transition: color 0.4s ease-in-out;
     &:hover {
