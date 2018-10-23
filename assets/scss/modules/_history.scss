@@ -18,7 +18,11 @@
     border-bottom: 3px solid #0c1122;
     text-align: left;
     list-style-type: none;
-    padding: 15px 5px 15px 5px;
+    padding: 15px;
+    transition: background-color 0.4s;
+    &:hover{
+      background-color: #0c1122;
+    }
     &-img{
       width: 101px;
       height: 57px;
@@ -30,7 +34,7 @@
     &-title{
       padding: 5px 5px 5px 10px;
       width: 70%;
-      text-align: center;
+      text-align: left;
       word-wrap: break-word;
     }
   }
