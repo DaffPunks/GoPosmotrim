@@ -4,7 +4,7 @@
 
   &-title{
     text-align: left;
-    padding: 10px 0px;
+    padding: 10px 0;
     border-top: 3px solid #0c1122;
     border-bottom: 3px solid #0c1122;
     padding-left: 15px;
@@ -14,11 +14,25 @@
     padding-left: 0;
   }
   &-item{
+    display: flex;
     border-bottom: 3px solid #0c1122;
     text-align: left;
     list-style-type: none;
-    padding-left: 15px;
-    padding-top: 15px;
+    padding: 15px 5px 15px 5px;
+    &-img{
+      width: 101px;
+      height: 57px;
+      border-radius: 3px;
+      padding-left: 14px;
+      padding-right: 10px;
+      background-size: cover;
+    }
+    &-title{
+      padding: 5px 5px 5px 10px;
+      width: 70%;
+      text-align: center;
+      word-wrap: break-word;
+    }
   }
 }
 
