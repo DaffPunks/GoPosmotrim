@@ -6,6 +6,13 @@
 
 A service for watching videos together with friends, even when you are far apart. So when your bro tells you **"Go Posmotrim this sh#t"**, you know what to do.
 
+---
+
+Q: Why don't you use frontend framework like React or... (A lot of other tools)
+
+A: This project was created by me and my friend, who has just started to learn the development. So this project is like practice for him. We don't need to complicate project, main goal is teach and learn.
+
+---
 
 ## How to run it?
 1. Surely, you should `git clone` this project
