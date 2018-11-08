@@ -12,49 +12,53 @@ module.exports = DatabaseController;
 
 
 function DatabaseController(app) {
-    var dbworker = app.get('postgresClient');
-
+    const dbworker = app.get('postgresClient');
 
     /* ============== Public Methods ============== */
 
-    var getLastVideo = function () {
+    const getLastVideo = () => {
         return new Promise(function (resolve, reject) {
             dbworker.query('SELECT video_id FROM video ORDER BY id DESC LIMIT 1')
                 .then((resp) => {
                     var lastVideoID = resp.rows[0].video_id;
-                    resolve(lastVideoID);
+                    return resolve(lastVideoID);
                 })
                 .catch(e => reject(e));
         })
     };
 
-    var insertVideo = function (videoID) {
+    const insertVideo = (videoID) => {
+
         return new Promise(function (resolve, reject) {
+            if(videoID === null || videoID === undefined){
+                return reject("Empty video id");
+            }
+
             dbworker.query('INSERT INTO video(video_id) VALUES($1)', [videoID])
                 .then(() => {
                     log('Video added: %s', videoID);
 
-                    resolve();
+                    return resolve();
                 })
                 .catch(e => reject(e));
         });
 
     };
 
-    var getLastTenVideos = function () {
+    const getLastTenVideos = () => {
         return new Promise(function (resolve, reject) {
             dbworker.query('SELECT video_id FROM video ORDER BY id DESC LIMIT 10')
                 .then((resp) => {
-                    var lastVideoID = resp.rows;
-                    resolve(lastVideoID);
+                    var lastVideoIDs = resp.rows;
+                    return resolve(lastVideoIDs);
                 })
                 .catch(e => reject(e));
         })
     };
 
     return {
-        getLastVideo: getLastVideo,
-        insertVideo: insertVideo,
-        getLastTenVideos: getLastTenVideos
+        getLastVideo,
+        insertVideo,
+        getLastTenVideos
     }
 }

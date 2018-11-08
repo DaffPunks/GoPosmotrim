@@ -11,6 +11,36 @@ var log = require('debug')('sockets'),
 
 module.exports = Sockets;
 
+/*
+ * Global variables
+ */
+ var App = null;
+ var IO  = null;
+ var currentVideo = '';
+ // module.exports.io = (()=>{ return IO; })();
+
+/*
+ * @param videoID The ID of Youtube video
+ */
+const addVideo = (videoID) => {
+    log('Attempt to add new video: %s', videoID);
+
+    if (currentVideo == videoID)
+        return;
+
+    const dbController = App.get('databaseController');
+    dbController.insertVideo(videoID)
+        .then(() => {
+            currentVideo = videoID;
+
+            // Emit GET_VIDEO
+            IO.emit('GET_VIDEO', videoID);
+        })
+        .catch(e => log('Error: ', e));
+}
+
+module.exports.addVideo = addVideo;
+
 /**
  * Socket.io
  *
@@ -33,12 +63,13 @@ module.exports = Sockets;
  */
 
 function Sockets(app, server) {
-    var io              = sio.listen(server),
-        config          = app.get('config'),
-        dbController    = app.get('databaseController');
+    App = app;
+    IO = sio.listen(server);
+
+    const config       = app.get('config'),
+          dbController = app.get('databaseController');
 
     var userList = [];
-    var currentVideo = '';
     var history = []; // TODO: make history
 
     dbController.getLastVideo()
@@ -50,10 +81,10 @@ function Sockets(app, server) {
 
 
     // CONNECTION
-    io.on('connection', function (socket) {
+    IO.on('connection', function (socket) {
         log('Connected user %s', socket.id);
 
-        var username = socket.id.slice(0, 5);
+        const username = socket.id.slice(0, 5);
 
         userList.push({
             username: username
@@ -72,20 +103,8 @@ function Sockets(app, server) {
         socket.broadcast.emit('USER_LIST_UPDATED', userList);
 
         // On ADD_VIDEO
-        socket.on('ADD_VIDEO', (videoID) => {
-            log('Attempt to add new video: %s', videoID);
-
-            if (currentVideo == videoID)
-                return;
-
-            dbController.insertVideo(videoID)
-                .then(() => {
-                    currentVideo = videoID;
-
-                    // Emit GET_VIDEO
-                    io.emit('GET_VIDEO', videoID);
-                })
-                .catch(e => log('Error: ', e));
+        socket.on('ADD_VIDEO', (videoID)=>{
+            addVideo(videoID, currentVideo);
         });
 
         // On GET_VIDEO_PAUSE
@@ -108,9 +127,6 @@ function Sockets(app, server) {
 
 
     });
-
-
-
 }
 
 /*
